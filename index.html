@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骨度法 トレーニング</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <h1>骨度法 トレーニング</h1>
+                <div class="controls">
+                    <div class="control-group">
+                        <button id="mode-individual" class="btn active" aria-label="各問モード"><i class="fa-solid fa-check-double"></i> 各問</button>
+                        <button id="mode-all" class="btn" aria-label="全問モード"><i class="fa-solid fa-list-check"></i> 全問</button>
+                    </div>
+                    <div class="control-group">
+                        <button id="btn-show-answer" class="btn btn-action" aria-label="回答表示"><i class="fa-solid fa-eye"></i> 回答表示</button>
+                        <button id="btn-reset" class="btn btn-action" aria-label="リセット"><i class="fa-solid fa-rotate-right"></i> リセット</button>
+                    </div>
+                    <div class="control-group">
+                        <button id="btn-initial-order" class="btn btn-action" aria-label="初期配列"><i class="fa-solid fa-arrow-down-1-9"></i> 初期配列</button>
+                        <button id="btn-shuffle" class="btn btn-action" aria-label="配列変更"><i class="fa-solid fa-shuffle"></i> 配列変更</button>
+                    </div>
+                    <button id="btn-guide" class="btn btn-icon" aria-label="説明表示"><i class="fa-solid fa-circle-question"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span class="progress-title"><i class="fa-solid fa-chart-bar"></i> 正答数</span>
+                <span class="progress-text" id="progress-text">0 / 21</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <div class="questions-container" id="questions-container">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Guide Modal -->
+    <div id="guide-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-book"></i> アプリの使い方</h2>
+                <button id="btn-close-guide" class="btn-close" aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <section class="guide-section">
+                    <h3>回答形式について</h3>
+                    <p>回答は数値と<strong>単位（尺、寸、分）を必ず入力</strong>してください。<br>単位がない場合は不正解となります。</p>
+                    <ul>
+                        <li>例1：<code>1尺2寸</code> または <code>12寸</code>（どちらも正解）</li>
+                        <li>例2：<code>8寸5分</code></li>
+                        <li>全角・半角どちらでも入力可能です。空白は無視されます。</li>
+                    </ul>
+                </section>
+                
+                <section class="guide-section">
+                    <h3>判定モード</h3>
+                    <div class="mode-desc">
+                        <span class="badge mode-indiv">各問モード</span>
+                        <p>入力と同時に即座に判定を行います。</p>
+                    </div>
+                    <div class="mode-desc">
+                        <span class="badge mode-all">全問モード</span>
+                        <p>入力中は判定されず、全21問すべてを入力し終わった瞬間に一括で判定されます。</p>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h3>判定の色</h3>
+                    <div class="color-desc">
+                        <div class="color-box correct"></div> <span>正解（赤色）</span>
+                    </div>
+                    <div class="color-desc">
+                        <div class="color-box incorrect"></div> <span>不正解（青色）</span>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h3>ボタンの機能</h3>
+                    <ul class="btn-guide-list">
+                        <li><strong><i class="fa-solid fa-eye"></i> 回答表示：</strong> 各問題の右側に正解テキストを表示/非表示します。</li>
+                        <li><strong><i class="fa-solid fa-arrow-down-1-9"></i> 初期配列：</strong> 問題の並び順を初期状態に戻します。</li>
+                        <li><strong><i class="fa-solid fa-shuffle"></i> 配列変更：</strong> 問題の順番をランダムにシャッフルします。</li>
+                        <li><strong><i class="fa-solid fa-rotate-right"></i> リセット：</strong> 入力内容と判定状態をすべてクリアします。</li>
+                    </ul>
+                </section>
+
+                <div class="modal-footer">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-dont-show">
+                        <span class="checkmark"></span>
+                        次回以降表示しない
+                    </label>
+                    <button id="btn-start" class="btn btn-primary">始める</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
